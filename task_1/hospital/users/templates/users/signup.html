@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Signup - Hospital
+{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href='{% static "users/css/style.css" %}'>
+{% endblock %}
+{% block content %}
+{% if not user.is_authenticated %}
+<div class="signup-container">
+	<h2 class="signup-header">Create New Account</h2>
+	<div class="signup-link">
+		Already registered? <a href='{% url "login" %}'>Login</a>
+	</div>
+	{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<li>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="{{ form.first_name.id_for_label }}" class="small">First Name</label>
+			{{ form.first_name }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.first_name.id_for_label }}" class="small">Last Name</label>
+			{{ form.last_name }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.profile_picture.id_for_label }}" class="small">Profile Picture</label>
+			{{ form.profile_picture }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.first_name.id_for_label }}" class="small">Username</label>
+			{{ form.username }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.email.id_for_label }}" class="small">Email</label>
+			{{ form.email }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.password1.id_for_label }}" class="small">Password</label>
+			{{ form.password }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.confirm_password.id_for_label }}" class="small">Confirm Password</label>
+			{{ form.confirm_password }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.address_line1.id_for_label }}" class="small">Address Line 1</label>
+			{{ form.address_line1 }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.city.id_for_label }}" class="small">City</label>
+			{{ form.city }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.state.id_for_label }}" class="small">State</label>
+			{{ form.state }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.pincode.id_for_label }}" class="small">Pincode</label>
+			{{ form.pincode }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.user_type.id_for_label }}" class="small">Register as</label>
+			{{ form.user_type }}
+		</div>
+		<button type="submit" class="signup-btn">Sign Up</button>
+	</form>
+</div>
+{% else %}
+<div class="signup-container">
+	<div style="text-align: center; margin-bottom: 1.5rem;">
+		<div style="font-size: 3rem; color: #28a745; margin-bottom: 1rem;">✅</div>
+		<h2 class="signup-header">Welcome Back!</h2>
+		<p style="color: #666; margin-bottom: 0;">Hey {{ user.first_name|default:user.username }}, you're already signed in</p>
+	</div>
+	<div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; text-align: center;">
+		<small style="color: #666;">Logged in as: <strong>{{ user.email|default:user.username }}</strong></small>
+	</div>
+	<button onclick="location.href='{% url 'home' %}'" class="signup-btn" style="margin-bottom: 1rem;">
+	🏠 Go to Dashboard
+	</button>
+	<div class="signup-link">
+		Want to switch accounts? <a href="" style="color: #dc3545;">Sign Out</a>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

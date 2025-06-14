@@ -23,6 +23,7 @@ STATICFILES_DIR = os.path.join(BASE_DIR, 'static')
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Environment variables
 SECRET_KEY = 'django-insecure-2nl3@a#y*c1++)-dccap5rj4h#z-75rp1b9t9g8rskql5c+lp='
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -30,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Application definition
 
@@ -79,8 +81,12 @@ WSGI_APPLICATION = 'hospital.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'hospital_db',
+        'USER': 'root',
+        'PASSWORD': 'Krishna@2004',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -121,6 +127,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [STATICFILES_DIR,]
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
