@@ -1,0 +1,25 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: kothasaikrishna
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: email-api
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: send-email
+
+provider:
+  name: aws
+  runtime: python3.12
+
+# suggested in docs
+plugins:
+  - serverless-offline
+
+functions:
+  send_email:
+    handler: handler.send_email
+    # timeout to prevent 504, lambda function timeout 
+    timeout: 30
+    events:
+      - httpApi:
+          path: send-email
+          # changed to post
+          method: post
