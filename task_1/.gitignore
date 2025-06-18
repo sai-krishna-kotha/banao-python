@@ -1,0 +1,7 @@
+task1-venv
+hospital/db.sqlite3
+hospital/hospital/__pycache__/
+hospital/media/
+hospital/users/__pycache__/
+*.pyc
+__pycache__
